@@ -12,19 +12,12 @@ menu_items = {
     "飲み物": [("お茶", 100), ("ジュース", 150), ("コーヒー", 200)]
 }
 
-@app.route('/')
-def index():
-    # 初回アクセス時はメニューとエラーメッセージを空で渡す
-    return render_template('kon.html', menu=None, total=0, error=None)
-
-@app.route('/set_budget', methods=['POST'])
-def set_budget():
-    budget = int(request.form['budget'])  # ユーザーが入力した予算を取得
-    
-    # 予算内でランダムにメニューを選択する
+def select_menu(budget):
     selected_menu = {}
     total_price = 0
     error = None
+    
+    if budget < 100 : error = "予算内でメニューを選ぶことができませんでした。"
     
     for category, items in menu_items.items():
         affordable_items = [item for item in items if item[1] <= budget - total_price]
@@ -33,10 +26,22 @@ def set_budget():
             selected_menu[category] = (item, price)
             total_price += price
         else:
-            error = "予算内でメニューを選ぶことができませんでした。"
-            selected_menu = {}
-            total_price = 0
+            # error = "予算内でメニューを選ぶことができませんでした。"
+            # selected_menu = {}
+            # total_price = 0
             break
+    
+    return selected_menu, total_price, error
+
+@app.route('/')
+def index():
+    # 初回アクセス時はメニューとエラーメッセージを空で渡す
+    return render_template('kon.html', menu=None, total=0, error=None)
+
+@app.route('/set_budget', methods=['POST'])
+def set_budget():
+    budget = int(request.form['budget'])  # ユーザーが入力した予算を取得
+    selected_menu, total_price, error = select_menu(budget)
     
     return render_template('kon.html', menu=selected_menu, total=total_price, error=error)
 
