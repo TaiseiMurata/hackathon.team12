@@ -1,41 +1,44 @@
-<!-- kondate.html -->
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--GoogleFont-->
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
     <title>ランダム献立生成アプリ</title>
-    <link rel="stylesheet" href="kondate.css">
+    <link rel="stylesheet" href="../static/kondate.css">
 </head>
 
 <body>
     <h1>今日の献立</h1>
 
-    <!-- 予算入力フォーム -->
-    <form action="/set_budget" method="post">
-        <label for="budget">予算を入力してください (円):</label>
-        <input type="number" id="budget" name="budget" required>
-        <button type="submit">予算を設定</button>
-    </form>
+    <div class="container">
+        <!-- 予算入力フォーム -->
+        <form action="/set_budget" method="post">
+            <label for="budget">予算を入力してください (円):</label>
+            <input type="number" id="budget" name="budget" required>
+            <button type="submit">予算を設定</button>
+        </form>
 
-    {% if menu %}
+        {% if menu %}
         <ul>
             <!-- メニュー項目の表示 -->
             {% for category, (item, price) in menu.items() %}
-                <li>{{ category }} : {{ item }} - ¥{{ price }}</li>
+            <li>{{ category }} : {{ item }} - ¥{{ price }}</li>
             {% endfor %}
         </ul>
         <p>合計金額 : ¥{{ total }}</p>
-    {% endif %}
+        {% endif %}
 
-    {% if error %}
+        {% if error %}
         <p style="color: red;">{{ error }}</p>
-    {% endif %}
+        {% endif %}
+    </div>
 
     <script src="kondate.js"></script>
 </body>
+
 </html>
