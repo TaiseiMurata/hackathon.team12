@@ -78,7 +78,7 @@ def select_menu(budget):
     for category, items in menu_items.items():
         affordable_items = [item for item in items if item[1] <= budget - total_price]
         if affordable_items:
-            item, price = random.choice(affordable_items)
+            item, price, calories= random.choice(affordable_items)
             selected_menu[category] = (item, price)
             total_price += price
         else:
