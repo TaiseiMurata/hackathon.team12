@@ -36,8 +36,10 @@ label {
 }
 
 input[type="number"] {
-    width: 80%; /* 幅を80%に調整 */
-    max-width: 250px; /* 最大幅を250pxに設定 */
+    width: 80%;
+    /* 幅を80%に調整 */
+    max-width: 250px;
+    /* 最大幅を250pxに設定 */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -84,6 +86,26 @@ p {
 p[style="color: red;"] {
     font-size: 1em;
     margin-top: 10px;
+}
+
+.anim-box.popup.is-animated {
+    animation: popup 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes popup {
+    0% {
+        transform: translateY(40px) scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1.0);
+    }
+
+    80%,
+    100% {
+        opacity: 1;
+    }
 }
 
 /* レスポンシブデザイン */
