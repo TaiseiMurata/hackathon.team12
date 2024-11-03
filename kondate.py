@@ -103,6 +103,7 @@ def select_menu(budget):
     selected_menu = {}
     total_price = 0
     error = None
+    otsuri = 0
     
     if budget < 100 : error = "予算内でメニューを選ぶことができませんでした。"
     
@@ -118,8 +119,9 @@ def select_menu(budget):
             # selected_menu = {}
             # total_price = 0
             break
+    otsuri = budget - total_price
     
-    return selected_menu, total_price, error
+    return selected_menu, total_price, error, otsuri
 
 @app.route('/')
 def index():
@@ -129,9 +131,9 @@ def index():
 @app.route('/set_budget', methods=['POST'])
 def set_budget():
     budget = int(request.form['budget'])  # ユーザーが入力した予算を取得
-    selected_menu, total_price, error = select_menu(budget)
+    selected_menu, total_price, error, otsuri = select_menu(budget)
     
-    return render_template('kon.html', menu=selected_menu, total=total_price, error=error)
+    return render_template('kon.html', menu=selected_menu, total=total_price, error=error, otsuri=otsuri)
 
 if __name__ == '__main__':
     app.run(debug=True)
