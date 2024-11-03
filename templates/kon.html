@@ -29,12 +29,12 @@
         {% if menu %}
         <ul>
             <!-- メニュー項目の表示 -->
-            {% for category, (item, price) in menu.items() %}
-            <li>{{ category }} : {{ item }} - ¥{{ price }}</li>
+            {% for category, (item, price, calorie) in menu.items() %}
+            <li>{{ category }} : {{ item }} - ¥{{ price }}  {{ calorie }}kcal</li>
             {% endfor %}
         </ul>
-        <p>合計金額 : ¥{{ total }}</p>
-        <!-- <p>おつり　 : ¥{{ total }}</p>　　　　これから表示したい。-->  
+        <p>合計金額 : ¥{{ total }}    おつり : ¥{{ otsuri }}</p>
+        <p>カロリー : {{ total_cal }}kcal</p>  
         {% endif %}
 
         {% if error %}
