@@ -76,6 +76,19 @@ button:hover {
     background-color: #45a049;
 }
 
+#category{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid;
+    border-color: #888;
+    border-radius:  4px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 4px #888;
+}
+
 /* メニューリストのスタイル */
 ul {
     list-style-type: none;
