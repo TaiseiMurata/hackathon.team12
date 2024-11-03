@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../static/kondate.css">
 </head>
 
-<body background="../static/images/lunch39.png">
+<body background="{{ url_for('static', filename='images/lunch39.png') }}">
     <div class="anim-box popup is-animated">
         <h1>今日の献立</h1>
     </div>
@@ -22,6 +22,17 @@
         <form action="/set_budget" method="post">
             <label for="budget">予算を入力してください (円):</label>
             <input type="number" id="budget" name="budget" required>
+
+            
+            <!-- カテゴリのプルダウンメニュー -->
+            <label for="category">時間帯を選択してください:</label>
+            <select id="category" name="category" required>
+                <option value="">-- 選択してください --</option>
+                <option value="morning">朝</option>
+                <option value="side_dish">昼</option>
+                <option value="soup">夜</option>
+            </select>
+
             <button type="submit">予算を設定</button>
         </form>
 
